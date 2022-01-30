@@ -20,4 +20,10 @@ const config = {
 	}
 };
 
-export default config;
+//export default config;
+export default {
+	kit: {
+		target: '#svelte',
+		adapter: adapter()
+	}
+};
