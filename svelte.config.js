@@ -1,29 +1,11 @@
-import cloudflare from '@sveltejs/adapter-cloudflare';
-import preprocess from 'svelte-preprocess';
+const sveltePreprocess = require('svelte-preprocess');
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess(),
-
-	kit: {
-		adapter: cloudflare(),
-
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
-
-		// Override http methods in the Todo forms
-		methodOverride: {
-			allowed: ['PATCH', 'DELETE']
-		}
-	}
-};
-
-//export default config;
-export default {
-	kit: {
-		target: '#svelte',
-		adapter: adapter()
-	}
+module.exports = {
+  preprocess: [
+    sveltePreprocess({
+      postcss: {
+        plugins: [require('autoprefixer')],
+      },
+    }),
+  ],
 };
